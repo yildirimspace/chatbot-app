@@ -1,0 +1,14 @@
+[theme]
+# Deep navy accent (from the logo)
+primaryColor = "#103A71"
+
+# Very dark blue/charcoal background (no white)
+backgroundColor = "#020617"
+
+# Slightly lighter dark panel / sidebar color
+secondaryBackgroundColor = "#0B1120"
+
+# Light grey text for contrast on dark background
+textColor = "#E5E7EB"
+
+font = "sans serif"
