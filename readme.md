@@ -24,12 +24,16 @@ Group_Project/
 │   ├── main.py                      # kickoff_query() entry point
 │   └── __init__.py
 ├── data/
-│   ├── canada_ai_strategy_report.pdf  # Our Parts 1–4 project report
-│   └── vectorstore_news_ai/           # Chroma vectorstore (auto-generated)
+│   ├── chatbot Report.pdf             # Main PDF report
+│   └── chatbot Tables.pdf             # Includes the tables for the report
+│   └── chatbot References.pdf         # Includes the references for the report
+│   └── vectorstore_ai/                # Chroma vectorstore (auto-generated)
 │       └── chroma.sqlite3
 ├── frontend/
 │   ├── assets/
 │   │   └── maple_protocol_logo.png    # The Maple Protocol logo
+│   │   └── chatbot_icon.png           # chatbot icon
+│   │   └── user_icon.png              # user icon
 │   ├── app.py                         # Streamlit front-end
 │   └── __init__.py
 ├── rag/
