@@ -68,17 +68,29 @@ header_col1, header_col2 = st.columns([1, 6], gap="medium")
 
 with header_col1:
     st.write("") 
+    st.write("")
     if os.path.exists(logo_path):
-        st.image(logo_path, width=160)
+        st.image(logo_path, width=140)
     else:
         st.write("The Maple Protocol")
 
 with header_col2:
-    st.title("The Maple Protocol – Canada AI Strategy Assistant")
-    st.caption(
-        "MIE 1624 Course Project – Team Maple Protocol – interactive chatbot grounded in our analysis and supporting evidence."
+    st.markdown(
+        """
+        <h1 style="line-height: 1.15;">
+            The Maple Protocol<br>
+            Canada AI Strategy Assistant
+        </h1>
+        """,
+        unsafe_allow_html=True,
     )
-
+    st.markdown(
+        """
+        **MIE 1624 Course Project – Team Maple Protocol**  
+        *Interactive AI assistant grounded in our original analysis and supporting evidence from the Maple Protocol report.*
+        """,
+        unsafe_allow_html=True,
+    )
 
 # Sidebar
 with st.sidebar:
@@ -112,11 +124,6 @@ with st.sidebar:
 
     if st.button("Clear chat", use_container_width=True):
         st.session_state.history = []
-
-
-
-    # if st.button("Clear chat", width="stretch"):
-    #     st.session_state.history = []
 
 
 # Chat state
@@ -164,8 +171,8 @@ st.caption("Quick Maple Protocol questions:")
 cols = st.columns(3)
 
 examples = [
-    "What determines national AI competitiveness?",
     "What is Canada’s Position Relative to Global AI Leaders?",
+    "What determines national AI competitiveness?",
     "Outline the implementation roadmap phases from 0 to 60+ months.",
 ]
 
