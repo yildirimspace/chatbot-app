@@ -5,21 +5,19 @@ from crew.tools import retrieve_context, retrieve_citations, summarize_text, ext
 policy_analyst = Agent(
     role="Senior Policy Researcher",
     goal=(
-        "Retrieve comprehensive evidence from the Maple Protocol PDF to answer user queries. "
-        "Find relevant sections, statistics, timelines, risks, and policy descriptions."
+        "Retrieve comprehensive evidence from the PDF report to answer user queries. "
+        "Find relevant sections, statistics, timelines, risks, or policy descriptions as needed."
     ),
     backstory=(
         "You are a meticulous researcher for the Canada AI Strategy project. "
-        "You excel at finding both quantitative indicators and qualitative details. "
-        "You provide high-quality raw material for the Strategy Architect."
+        "Your job is to find the ground truth in the 'Maple Protocol' PDF."
     ),
     llm=chatgpt_llm,
-    tools=[retrieve_context],  # <-- only this for now
+    tools=[retrieve_context],
     verbose=True,
     allow_delegation=False,
+    max_iter=2,
 )
-
-
 
 domain_expert = Agent(
     role="Chief AI Strategy Architect",
