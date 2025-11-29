@@ -21,6 +21,23 @@ from crew.main import kickoff_query                     # expects: kickoff_query
 from crew.tasks import DOMAIN_DIRECTIVES                # dict of domain -> directive text
 
 
+# --- Data window config (PDFs shown in sidebar) ---
+DATA_FILES_DIR = os.path.join(PROJECT_ROOT, "data")
+
+def get_data_files():
+    """Return a sorted list of PDF filenames in DATA_FILES_DIR."""
+    if not os.path.isdir(DATA_FILES_DIR):
+        return []
+    files = [
+        f for f in os.listdir(DATA_FILES_DIR)
+        if os.path.isfile(os.path.join(DATA_FILES_DIR, f))
+        and f.lower().endswith(".pdf")
+    ]
+    files.sort()
+    return files
+
+
+
 # Page config
 st.set_page_config(
     page_title="The Maple Protocol – Canada AI Strategy Assistant",
@@ -55,6 +72,39 @@ with st.sidebar:
         "- If you update the underlying PDFs or data, re-run: `python -m rag.ingest`."
     )
 
+    # Shows the data used
+    PDF_ICON_PATH = os.path.join(CURRENT_DIR, "assets", "PDF_icon.png")
+
+    st.divider()
+    st.subheader("Data currently loaded")
+
+    data_files = get_data_files()
+
+    if not data_files:
+        st.markdown(
+            "_No PDF files found in `data/`. Check the folder or rerun `python -m rag.ingest`._"
+        )
+    else:
+        for f in data_files:
+            # one small white card per file
+            with st.container(border=True):
+                col_name, col_icon = st.columns([4, 1])
+                with col_name:
+                    st.markdown(
+                        f"<span style='font-size:0.9rem;'>{f}</span>",
+                        unsafe_allow_html=True,
+                    )
+                with col_icon:
+                    if os.path.exists(PDF_ICON_PATH):
+                        st.image(PDF_ICON_PATH, width=24)
+                    else:
+                        st.write("📄")
+
+    st.divider()
+
+
+
+    # Select the domain of the chatbot
     selected_domain = st.selectbox(
         "Answer focus",
         ["general", "policy", "research", "product", "manufacturing"],
