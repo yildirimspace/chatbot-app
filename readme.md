@@ -63,7 +63,8 @@ pip install -U \
   sentence-transformers \
   chromadb \
   python-dotenv \
-  streamlit
+  streamlit \
+  unstructured
 ```
 
 ---
