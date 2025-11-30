@@ -34,7 +34,7 @@ st.markdown(
     <style>
     /* Extra space below the chat input so the disclaimer never overlaps */
     [data-testid="stChatInput"] {
-        margin-bottom: 3.3rem !important;  /* was ~2.2rem */
+        margin-bottom: 4.5rem !important;  /* was ~3.3rem */
     }
 
     /* Make the inner chat input container a positioning context */
