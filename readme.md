@@ -142,9 +142,9 @@ streamlit run frontend/app.py
 - **Data Source:** The system is fully grounded in the course report PDFs; no external web scraping or RSS aggregation is used.
 - **Key Concepts Demonstrated:**
   - Retrieval-Augmented Generation (RAG)
-  - Multi-agent reasoning (CrewAI)
+  - Multi-agent orchestration (CrewAI)
   - Custom tool integration
-  - Professional UI and branding
+  - Streamlit-based chatbot UI with project branding
 
 ---
 
