@@ -101,7 +101,7 @@ python crew/main.py
 ```
 
 ## Step 3 — Launch the Streamlit Application
-This loads the UI branded for The Maple Protocol
+This loads the UI branded for The Maple Protocol.
 ```bash
 streamlit run frontend/app.py
 ```
@@ -132,13 +132,13 @@ streamlit run frontend/app.py
 - **Branding:**
   - Logo integration.
   - Theme configured in `.streamlit/config.toml`.
-- Chat interface built around `kickoff_query()`.
+- **Chat interface:** built around `kickoff_query()`.
 
 ---
 
 # Notes for Instructor / TA
 - `.env` and `.venv` are excluded from version control.
-- **Reproducibility:** The Vectorstore is reproducible by running `python -m rag.ingest` with the provided PDF.
+- **Reproducibility:** The Vectorstore is reproducible by running `python -m rag.ingest` with the provided PDFs.
 - **Data Source:** The system is fully grounded in the course report PDFs; no external web scraping or RSS aggregation is used.
 - **Key Concepts Demonstrated:**
   - Retrieval-Augmented Generation (RAG)
