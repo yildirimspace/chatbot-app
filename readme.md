@@ -113,7 +113,7 @@ streamlit run frontend/app.py
 1. **Retrieval Layer (RAG)**
 - **Loader:** Loads PDF using `UnstructuredPDFLoader`.
 - **Chunking:** Splits text via `RecursiveCharacterTextSplitter`.
-- **Embeddings:** Uses `SentenceTransformerEmbeddings` ("all-MiniLM-L6-v2").
+- **Embeddings:** Uses `SentenceTransformerEmbeddings` ("all-mpnet-base-v2").
 - **Storage:** Stores vectors in a **Chroma** vector database.
 - **Access:** Accessed through a custom retriever in `rag/retriever.py`.
 
