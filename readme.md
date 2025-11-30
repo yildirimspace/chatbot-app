@@ -3,22 +3,22 @@
 
 This project implements a **domain-specific chatbot** that answers questions about **Canada’s AI innovation and competitiveness strategy**.
 
-Instead of relying on online news or external data, the chatbot is **grounded entirely in our own course project report**, stored as:
-`data/canada_ai_strategy_report.pdf`
+Instead of relying on online news or external data, the chatbot is **grounded entirely in our own course project report**, stored as three PDFs in `data/`:
+`chatbot Report.pdf`, `chatbot Tables.pdf`, and `chatbot References.pdf`.
 
-This PDF is ingested, chunked, embedded, and stored in a **Chroma vector database**. **CrewAI agents** then use a **LangChain RAG pipeline** to retrieve the most relevant sections and generate well-structured, cited responses through a **Streamlit UI** branded as **The Maple Protocol**.
+These PDFs are ingested, chunked, embedded, and stored in a **Chroma vector database**. **CrewAI agents** then use a **LangChain-based RAG pipeline** to retrieve the most relevant sections and generate well-structured, evidence-based responses through a **Streamlit UI** branded as **The Maple Protocol**.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
 You can try the deployed chatbot here:
 
-👉 **https://canaibot.streamlit.app/**
+**https://canaibot.streamlit.app/**
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Group_Project/
@@ -26,23 +26,23 @@ Group_Project/
 │   └── config.toml                  # UI theme (Maple Protocol colours)
 ├── crew/
 │   ├── agents.py                    # CrewAI agent definitions
-│   ├── tools.py                     # RAG tools (retrieval, summary, keywords)
+│   ├── tools.py                     # RAG tools (retrieval, citations, etc.)
 │   ├── tasks.py                     # Multi-step tasks for the agents
 │   ├── llm.py                       # LLM configuration
 │   ├── main.py                      # kickoff_query() entry point
 │   └── __init__.py
 ├── data/
-│   ├── chatbot Report.pdf             # Main PDF report
-│   └── chatbot Tables.pdf             # Includes the tables for the report
-│   └── chatbot References.pdf         # Includes the references for the report
-│   └── vectorstore_ai/                # Chroma vectorstore (auto-generated)
+│   ├── chatbot Report.pdf           # Main PDF report
+│   ├── chatbot Tables.pdf           # Report tables
+│   ├── chatbot References.pdf       # References for the report
+│   └── vectorstore_ai/              # Chroma vectorstore (auto-generated)
 │       └── chroma.sqlite3
 ├── frontend/
 │   ├── assets/
-│   │   └── maple_protocol_logo.png    # The Maple Protocol logo
-│   │   └── chatbot_icon.png           # chatbot icon
-│   │   └── user_icon.png              # user icon
-│   ├── app.py                         # Streamlit front-end
+│   │   ├── maple_protocol_logo.png  # The Maple Protocol logo
+│   │   ├── chatbot_icon.png         # Chatbot icon
+│   │   └── user_icon.png            # User icon
+│   ├── app.py                       # Streamlit front-end
 │   └── __init__.py
 ├── rag/
 │   ├── ingest.py                    # Builds vectorstore from PDFs
@@ -55,15 +55,15 @@ Group_Project/
 
 ---
 
-## ✅ Installation Instructions
+## Installation Instructions
 
-### 1️⃣ Create a virtual environment
+### 1. Create a virtual environment
 ```bash
 python -m venv .venv
 .\.venv\Scripts\activate
 ```
 
-### 2️⃣ Install dependencies
+### 2. Install dependencies
 ```bash
 pip install -U \
   crewai "crewai[openai]" \
@@ -78,7 +78,7 @@ pip install -U \
 
 ---
 
-## ✅ 3️⃣ Add Your OpenAI API Key
+## 3. Add Your OpenAI API Key
 Create a file named `.env` in the root folder.
 ```
 OPENAI_API_KEY=sk-xxxx...
@@ -86,21 +86,21 @@ OPENAI_API_KEY=sk-xxxx...
 
 ---
 
-# ✅ How to Run the Project
+# How to Run the Project
 
-## 🚀 Step 1 — Build the Vectorstore from the PDF
+## Step 1 — Build the Vectorstore from the PDF
 This reads every `*.pdf` inside `data/`, chunks it, embeds it, and persists a Chroma DB.
 ```bash
 python -m rag.ingest
 ```
 
-## 🚀 Step 2 — Test the CrewAI Backend
+## Step 2 — Test the CrewAI Backend
 This lets you test the RAG + agent pipeline directly from the terminal.
 ```bash
 python crew/main.py
 ```
 
-## 🚀 Step 3 — Launch the Streamlit Application
+## Step 3 — Launch the Streamlit Application
 This loads the UI branded for The Maple Protocol
 ```bash
 streamlit run frontend/app.py
@@ -108,7 +108,7 @@ streamlit run frontend/app.py
 
 ---
 
-# 🧠 RAG + CrewAI Architecture Overview
+# RAG + CrewAI Architecture Overview
 
 1. **Retrieval Layer (RAG)**
 - **Loader:** Loads PDF using `UnstructuredPDFLoader`.
@@ -120,29 +120,29 @@ streamlit run frontend/app.py
 2. **CrewAI Layer**
 - **Researcher Agent:** Retrieves context (`task_gather`).
 - **Domain-Expert Agent:** Writes final answers (`task_answer`).
-- **Tools:**
-  - `retrieve_context`
+- **Tools (defined in `crew/tools.py`):**
+  - `retrieve_context` (core RAG retrieval)
   - `retrieve_citations`
   - `summarize_text`
   - `extract_keywords`
-- **Strict Rules:** Cite retrieved content, do not hallucinate, and follow domain directives (policy, research, product, etc.).
+- **Strict Rules:** Answers are grounded in retrieved context and follow domain directives (policy, research, product, etc.).
 
 3. **Front-End Layer**
 - **Streamlit App:** located in `frontend/app.py`.
 - **Branding:**
   - Logo integration.
   - Theme configured in `.streamlit/config.toml`.
-  - Chat interface built around `kickoff_query()`.
+- Chat interface built around `kickoff_query()`.
 
 ---
 
-# ✅ Notes for Instructor / TA
-- `.env` and `.venv` are excluded
+# Notes for Instructor / TA
+- `.env` and `.venv` are excluded from version control.
 - **Reproducibility:** The Vectorstore is reproducible by running `python -m rag.ingest` with the provided PDF.
-- **Data Source:** No external web scraping or RSS aggregation is used. The entire system is grounded in our own course report, satisfying Part 5 requirements.
+- **Data Source:** The system is fully grounded in the course report PDFs; no external web scraping or RSS aggregation is used.
 - **Key Concepts Demonstrated:**
   - Retrieval-Augmented Generation (RAG)
-  - Multi-agent reasoning
+  - Multi-agent reasoning (CrewAI)
   - Custom tool integration
   - Professional UI and branding
 
