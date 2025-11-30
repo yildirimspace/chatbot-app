@@ -64,7 +64,8 @@ pip install -U \
   chromadb \
   python-dotenv \
   streamlit \
-  unstructured
+  unstructured "unstructured[pdf]" unstructured-inference \
+  pi-heif pypdf
 ```
 
 ---
