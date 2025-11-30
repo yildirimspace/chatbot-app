@@ -10,6 +10,14 @@ This PDF is ingested, chunked, embedded, and stored in a **Chroma vector databas
 
 ---
 
+## 🌐 Live Demo
+
+You can try the deployed chatbot here:
+
+👉 **https://canaibot.streamlit.app/**
+
+---
+
 ## 📁 Project Structure
 
 ```text
